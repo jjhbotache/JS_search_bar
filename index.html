@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>search bar exercise</title>
+    <link rel="shortcut icon" href="#" type="image/x-icon">
+    <link rel="stylesheet" href="stylesheet.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      
+      <div class="col mt-3">
+        <section id="search" class="mt-2 mb-5">
+          <form class="d-flex mb-1 ">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" >Search</button>
+          </form>
+          <div class="d-flex align-items-center">
+            <h5 class="me-3">Filter by:</h5>
+            <div class="btn-group">
+              <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="dropdown1-text">
+              Due date
+            </button>
+            <select class="dropdown-menu" id="dropdown1">
+              <option class="dropdown-item" value="0">
+                None
+              </option>
+              <option class="dropdown-item" value="1">
+                Today
+              </option>
+              <option class="dropdown-item" value="2">
+                Next week
+              </option>
+              <option class="dropdown-item" value="3">
+                Next two weeks
+              </option>
+              <option class="dropdown-item" value="4">
+                Next month
+              </option>
+              <option class="dropdown-item" value="5">
+                Next year
+              </option>
+              
+            </select>
+            </div>
+            <div class="form-check ms-3">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+              <label class="form-check-label" for="flexCheckDefault">
+                Already done
+              </label>
+            </div>
+            <button class="btn btn-outline-primary rounded-3 ms-5" id="clear">clear</button>
+          </div>
+      </section>
+        
+
+        <ul class="list-group" id="tasks">
+
+            <li class="list-group-item d-flex">
+              <input class="form-check-input mx-2" type="checkbox">
+              <div class="task_container">
+                <span class="ms-2 fw-bold">Title</span>
+                <span> Due date: 12-10-2024</span>
+                <span class="ms-2">description</span>
+              </div>
+            </li>
+
+        </ul>      
+      </div>
+
+      <div class="col">
+        <h2 class="text-center">Create your task!</h2>
+        <div class="mb-5">
+          <div class="mb-3">
+            <label for="taskTitle" class="form-label">Title</label>
+            <input type="text" class="form-control" id="taskTitle" placeholder="Do my JavaScript Homework">
+          </div>
+          <div class="mb-3">
+            <label for="taskDescription" class="form-label">Description</label>
+            <textarea class="form-control" placeholder="End a functional search bar by using JavaScript" id="taskDescription"></textarea>
+          </div>
+          <div class="mb-3">
+            <input type="date" name="taskDate" id="taskDate"><br>
+          </div>
+          <button class="btn btn-primary rounded-3" id="createBtn">Create</button>
+        </div>
+        <div class="alert alert-danger rounded-pill text-center fs-4 p-1" id="alert">
+          Fill all the fields!
+        </div>
+      </div>
+      
+    </div>
+  </div>  
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="main.js"></script>
+</body>
+</html>

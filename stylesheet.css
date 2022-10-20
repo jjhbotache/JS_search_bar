@@ -1,0 +1,12 @@
+textarea{
+    height: 10em !important;
+    resize: none !important;
+}
+.task_container{
+    display: grid;
+    height: 100%;
+    width: 100%;
+    grid-template-columns: repeat(2,1fr);
+    grid-template-rows: repeat(2,1fr);
+    grid-column: 1/-1;
+}
