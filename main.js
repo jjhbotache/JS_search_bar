@@ -110,7 +110,7 @@ function search(title,date,done) {
         const element = taskList[z];
         let taskTitle = Array.from(element.getElementsByClassName("fw-bold"));taskTitle=taskTitle[0].innerHTML;
         let taskDescription = Array.from(element.getElementsByClassName("ms-3"));taskDescription=taskDescription[0].innerHTML;
-        let taskDate = Array.from(element.getElementsByClassName("ms-5"));taskDate=taskDate[0].innerHTML;taskDate=taskDate.slice(10);console.log(taskDate);
+        let taskDate = Array.from(element.getElementsByClassName("ms-5"));taskDate=taskDate[0].innerHTML;taskDate=taskDate.slice(10);
         let taskDone = Array.from(element.getElementsByTagName("input"));taskDone=taskDone[0].checked;
         console.log(taskTitle,taskDescription,taskDate,taskDone);
 
@@ -129,14 +129,38 @@ function search(title,date,done) {
                 let year = taskDate.slice(0,4);
                 let month = taskDate.slice(5,7);
                 let day = taskDate.slice(8);
-                console.log(year,month,day);
-                var today = new Date();
-                var dd = String(today.getDate()).padStart(2, "0");
-                var mm = String(today.getMonth() + 1).padStart(2, "0");
-                var yyyy = today.getFullYear();
-                switch (date) {
+                let taskDay = new Date(year,month-1,day);
+                let today = new Date();
+                let difference = Math.floor((Math.abs(taskDay-today))/(1000*60*60*24));
+                console.log(difference);
+                switch (parseInt(date)) {
                     case 1:
-                        if ((day!=dd)||(month!=mm)||(yyyy!=yyyy)) {
+                        if (difference>0) {
+                            taskList.splice(z,1)
+                            element.style.setProperty('display', 'none', 'important');
+                        }
+                        break;
+                    case 2:
+                        alert(difference>=8);
+                        if (difference>=8) {
+                            taskList.splice(z,1)
+                            element.style.setProperty('display', 'none', 'important');
+                        }
+                        break;
+                    case 3:
+                        if (difference>=15) {
+                            taskList.splice(z,1)
+                            element.style.setProperty('display', 'none', 'important');
+                        }
+                        break;
+                    case 4:
+                        if (difference>=31) {
+                            taskList.splice(z,1)
+                            element.style.setProperty('display', 'none', 'important');
+                        }
+                        break;
+                    case 5:
+                        if (difference>=366) {
                             taskList.splice(z,1)
                             element.style.setProperty('display', 'none', 'important');
                         }
@@ -145,6 +169,7 @@ function search(title,date,done) {
             }
         }
     }
+
 
     taskList.forEach(element => {
         element.style.setProperty('display', 'flex', 'important');
