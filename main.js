@@ -20,8 +20,12 @@ window.onload=function(){
     
     var searchbtn = document.getElementById("search").addEventListener("click",()=>{
         let title = document.getElementById("searchInput").value
+        let date = document.getElementById("dropdown1").value;
+        let checkbox = document.getElementById("checkbox").checked;
+        
         console.log("looking for: ",title);
-        search(title,"10-10-2022",true);
+        console.log("filters: ",date,checkbox);
+        search(title,date,checkbox);
     });
     var clearbtn = document.getElementById("clear").addEventListener("click",()=>{
         clear();
@@ -106,15 +110,42 @@ function search(title,date,done) {
         const element = taskList[z];
         let taskTitle = Array.from(element.getElementsByClassName("fw-bold"));taskTitle=taskTitle[0].innerHTML;
         let taskDescription = Array.from(element.getElementsByClassName("ms-3"));taskDescription=taskDescription[0].innerHTML;
-        let taskDate = Array.from(element.getElementsByClassName("ms-5"));taskDate=taskDate[0].innerHTML;
-        console.log(taskTitle,taskDescription,taskDate);
+        let taskDate = Array.from(element.getElementsByClassName("ms-5"));taskDate=taskDate[0].innerHTML;taskDate=taskDate.slice(10);console.log(taskDate);
+        let taskDone = Array.from(element.getElementsByTagName("input"));taskDone=taskDone[0].checked;
+        console.log(taskTitle,taskDescription,taskDate,taskDone);
 
-        if (title.toLowerCase() != taskTitle.toLowerCase()) {
-            alert(taskTitle);
-            taskList.splice(z,1)
-            element.style.setProperty('display', 'none', 'important');
+        if (!(taskTitle.toLowerCase().includes(title.toLowerCase()))) {
+            if (!(taskDescription.toLowerCase().includes(title.toLowerCase()))) {
+                taskList.splice(z,1)
+                element.style.setProperty('display', 'none', 'important');
+            }
+        }
+        else{
+            if (taskDone!=done) {
+                taskList.splice(z,1)
+                element.style.setProperty('display', 'none', 'important');
+            }
+            if (date!=0) {
+                let year = taskDate.slice(0,4);
+                let month = taskDate.slice(5,7);
+                let day = taskDate.slice(8);
+                console.log(year,month,day);
+                var today = new Date();
+                var dd = String(today.getDate()).padStart(2, "0");
+                var mm = String(today.getMonth() + 1).padStart(2, "0");
+                var yyyy = today.getFullYear();
+                switch (date) {
+                    case 1:
+                        if ((day!=dd)||(month!=mm)||(yyyy!=yyyy)) {
+                            taskList.splice(z,1)
+                            element.style.setProperty('display', 'none', 'important');
+                        }
+                        break;
+                }
+            }
         }
     }
+
     taskList.forEach(element => {
         element.style.setProperty('display', 'flex', 'important');
     });
@@ -125,4 +156,5 @@ function search(title,date,done) {
 function clear() {   
     document.getElementById("dropdown1").value = 0;
     document.getElementById("checkbox").checked = false;
+    document.getElementById("searchInput").value = ""
 }
